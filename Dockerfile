@@ -11,4 +11,4 @@ COPY entrypoint.sh /backup
 WORKDIR /backup
 RUN chmod +x entrypoint.sh
 
-CMD ["./entrypoint.sh"]
+CMD ["/backup/entrypoint.sh"]
