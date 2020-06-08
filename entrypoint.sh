@@ -13,8 +13,10 @@ TIME=`/bin/date +%d-%m-%Y-%T`
 
 DEFAULT_DUMPFILE=$DB_NAME.sql.gz
 DUMP_FILE="${INPUT_DUMPFILE_PATH:-$DEFAULT_DUMPFILE}"
-DB_DUMPFILE=$DUMP_PATH/$DUMP_FILE
+
+mkdir -p $DUMP_PATH
+cd $DUMP_PATH
 
 echo "Dumping database now."
-mysqldump -h $DB_HOST -u $DB_USERNAME -p$PASSWORD $DB_NAME | gzip > ./$DB_DUMPFILE
+mysqldump -h $DB_HOST -u $DB_USERNAME -p$PASSWORD $DB_NAME | gzip > ./$DUMP_FILE
 echo "Complete"
