@@ -7,6 +7,8 @@ RUN apk add --no-cache mysql-client
 RUN mkdir -p /backup
 
 COPY entrypoint.sh /backup 
+
 WORKDIR /backup
+RUN chmod +x entrypoint.sh
 
 CMD ["./entrypoint.sh"]
