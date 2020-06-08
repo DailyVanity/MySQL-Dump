@@ -9,4 +9,4 @@ RUN mkdir -p /backup
 COPY entrypoint.sh /backup 
 WORKDIR /backup
 
-CMD ["entrypoint"]
+CMD ["./entrypoint.sh"]
