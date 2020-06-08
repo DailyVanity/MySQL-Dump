@@ -1,0 +1,43 @@
+# action.yml
+name: 'Execute MySql Dump'
+author: 'Chris Sim'
+description: 'Excute MySql Dump as Github Action and same the file as .sql.gz extension'
+inputs:
+  database_host:
+    description: 'Database host'
+    required: true
+  database_username:
+    description: 'Database UserName'
+    required: true
+  database_password:
+    description: 'Database Password'
+    required: true
+  database_port:
+    description: 'Database port default 3306'
+    required: false
+  database_name:
+    description: 'Database to dump'
+    required: true
+  dumpfile_name:
+    description: 'Location of the dump filename without .sql.gz. Default to same as database name'
+    required: false
+  dumpfile_path:
+    description: 'Location of the dump file and name. Default to `backup`'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.playbookName }}
+    - ${{ inputs.inventoryFile }}
+    - ${{ inputs.requirementsFile }}
+    - ${{ inputs.galaxyGithubUser }}
+    - ${{ inputs.galaxyGithubToken }}
+    - ${{ inputs.keyFile }}
+    - ${{ inputs.keyFileVaultPass }}
+    - ${{ inputs.extraVars }}
+    - ${{ inputs.extraFile }}
+    - ${{ inputs.verbosity }}
+branding:
+  icon: 'cloud-lightning'
+  color: 'purple'
