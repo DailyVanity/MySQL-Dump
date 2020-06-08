@@ -4,11 +4,7 @@ LABEL EMAIL chris.sim@dailyvanity.sg
 
 RUN apk add --no-cache mysql-client
 
-RUN mkdir -p /backup
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-COPY entrypoint.sh /backup 
-
-WORKDIR /backup
-RUN chmod +x entrypoint.sh
-
-CMD ["sh","/backup/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
