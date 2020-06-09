@@ -18,5 +18,5 @@ mkdir -p $DUMP_PATH
 cd $DUMP_PATH
 
 echo "Dumping database now."
-mysqldump -h $DB_HOST -u $DB_USERNAME -p$PASSWORD --show-progress-size $DB_NAME | gzip > ./$DUMP_FILE
+mysqldump -h $DB_HOST -u $DB_USERNAME -p$PASSWORD $DB_NAME | pv --progress --size 100m | gzip > ./$DUMP_FILE
 echo "Complete"
