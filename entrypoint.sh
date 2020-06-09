@@ -1,12 +1,12 @@
 #!/bin/sh
 
 set -e
-echo $INPUT_DATABASE_PASSWORD
+
 DB_PASSWORD="${INPUT_DATABASE_PASSWORD}"
 DB_USERNAME="${INPUT_DATABASE_USERNAME}"
 DB_NAME="${INPUT_DATABASE_NAME}"
 DB_HOST="${INPUT_DATABASE_HOST}"
-DB_HOST="${INPUT_DATABASE_PORT}"
+DB_PORT="${INPUT_DATABASE_PORT:-3306}"
 
 DUMP_PATH="${INPUT_DUMPFILE_PATH:-backup}"
 TIME=`/bin/date +%d-%m-%Y-%T`
@@ -16,8 +16,6 @@ DUMP_FILE="${INPUT_DUMPFILE_PATH:-$DEFAULT_DUMPFILE}"
 
 mkdir -p $DUMP_PATH
 cd $DUMP_PATH
-echo "host: $DB_HOST"
-echo "username: $DB_USERNAME"
 
 echo "Dumping database now."
 mysqldump -h $DB_HOST -u $DB_USERNAME -p$PASSWORD --show-progress-size $DB_NAME | gzip > ./$DUMP_FILE
