@@ -19,6 +19,8 @@ cd $DUMP_PATH
 
 echo "Dumping database now."
 echo "Backing dump to $DUMP_PATH/$DUMP_FILE, use BACKUP_DUMP_FILE enviroment to access the file"
-echo "::set-env name=BACKUP_DUMP_FILE::$DUMP_PATH/$DUMP_FILE"
+echo "FileName is set as BACKUP_DUMP_FILENAME $DUMP_FILE"
+echo "::set-env name=BACKUP_DUMP_FILE_LOCATION::$DUMP_PATH/$DUMP_FILE"
+echo "::set-env name=BACKUP_DUMP_FILENAME::$DUMP_FILE"
 mysqldump -h $DB_HOST -u $DB_USERNAME -p$DB_PASSWORD --single-transaction=TRUE $DB_NAME | pv --progress --size 100m | gzip > ./$DUMP_FILE
 echo "Complete"
